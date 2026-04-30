@@ -1,6 +1,6 @@
 /* Mobile first — iOS-style detail page */
 .page {
-  padding-top: 8px;
+  padding-top: calc(var(--safe-top) + 8px);
   max-width: 640px;
   margin: 0 auto;
   padding-bottom: 40px;

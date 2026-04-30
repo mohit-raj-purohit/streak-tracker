@@ -1,6 +1,6 @@
 /* Mobile first */
 .page {
-  padding-top: 16px;
+  padding-top: calc(var(--safe-top) + 16px);
 }
 
 .heading {
