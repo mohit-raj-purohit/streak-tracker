@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import { flushSync } from 'react-dom';
 import Navbar from './components/Navbar';
 import ReminderBanner from './components/ReminderBanner';
 import FloatingWidget from './components/FloatingWidget';
@@ -19,26 +18,6 @@ const pageComponents = {
   achievements: AchievementsPage,
 };
 
-/**
- * Navigate with CSS View Transitions.
- * Uses flushSync so React commits the DOM update synchronously
- * inside the transition callback — this is what makes it work.
- */
-function navigateWithTransition(direction, updateFn) {
-  if (!document.startViewTransition) {
-    updateFn();
-    return;
-  }
-
-  document.documentElement.dataset.vtDirection = direction;
-
-  document.startViewTransition(() => {
-    flushSync(() => {
-      updateFn();
-    });
-  });
-}
-
 export default function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [detailStreakId, setDetailStreakId] = useState(null);
@@ -47,24 +26,18 @@ export default function App() {
   const { editStreak } = useStreaks();
 
   const handlePageChange = useCallback((page) => {
-    navigateWithTransition('forward', () => {
-      setDetailStreakId(null);
-      setCurrentPage(page);
-    });
+    setDetailStreakId(null);
+    setCurrentPage(page);
   }, []);
 
   const openStreak = useCallback((id) => {
-    navigateWithTransition('forward', () => {
-      setDetailStreakId(id);
-      setCurrentPage('detail');
-    });
+    setDetailStreakId(id);
+    setCurrentPage('detail');
   }, []);
 
   const goBack = useCallback(() => {
-    navigateWithTransition('back', () => {
-      setDetailStreakId(null);
-      setCurrentPage('dashboard');
-    });
+    setDetailStreakId(null);
+    setCurrentPage('dashboard');
   }, []);
 
   const handleEditFromDetail = (streak) => {
@@ -89,8 +62,7 @@ export default function App() {
       )}
       <main className="app-container">
         {showNavbar && <ReminderBanner />}
-
-        <div className="vt-page-content">
+        <div>
           {isDetail ? (
             <StreakDetail
               streakId={detailStreakId}

@@ -279,75 +279,7 @@ select {
 }
 
 /* ===================================================================
-   VIEW TRANSITIONS — native app-like page transitions
-   Only applied in browsers that support view-transition-name.
-   Safari/Firefox will skip this entire block gracefully.
+   PAGE TRANSITIONS — JS-based fallback (no CSS View Transitions)
+   View Transitions API is used in JS only when supported.
+   No CSS at-rules needed — avoids Safari parse errors.
    =================================================================== */
-
-@supports (view-transition-name: none) {
-  .vt-page-content {
-    view-transition-name: page-content;
-  }
-
-  .vt-navbar-top {
-    view-transition-name: navbar-top;
-  }
-
-  .vt-navbar-bottom {
-    view-transition-name: navbar-bottom;
-  }
-
-  @view-transition {
-    navigation: auto;
-  }
-
-  ::view-transition-old(page-content),
-  ::view-transition-new(page-content) {
-    height: 100%;
-    width: 100%;
-  }
-
-  ::view-transition-old(page-content) {
-    animation: 250ms cubic-bezier(0.4, 0, 0.2, 1) both vt-out-forward;
-  }
-
-  ::view-transition-new(page-content) {
-    animation: 250ms cubic-bezier(0.4, 0, 0.2, 1) both vt-in-forward;
-  }
-
-  [data-vt-direction="back"]::view-transition-old(page-content) {
-    animation: 250ms cubic-bezier(0.4, 0, 0.2, 1) both vt-out-back;
-  }
-
-  [data-vt-direction="back"]::view-transition-new(page-content) {
-    animation: 250ms cubic-bezier(0.4, 0, 0.2, 1) both vt-in-back;
-  }
-
-  ::view-transition-group(navbar-top),
-  ::view-transition-group(navbar-bottom) {
-    animation: none;
-  }
-}
-
-@keyframes vt-out-forward {
-  to { opacity: 0; transform: translateX(-4%); }
-}
-
-@keyframes vt-in-forward {
-  from { opacity: 0; transform: translateX(4%); }
-}
-
-@keyframes vt-out-back {
-  to { opacity: 0; transform: translateX(4%); }
-}
-
-@keyframes vt-in-back {
-  from { opacity: 0; transform: translateX(-4%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(page-content),
-  ::view-transition-new(page-content) {
-    animation-duration: 0.01ms !important;
-  }
-}
