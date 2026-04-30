@@ -285,6 +285,18 @@ select {
    =================================================================== */
 
 @supports (view-transition-name: none) {
+  .vt-page-content {
+    view-transition-name: page-content;
+  }
+
+  .vt-navbar-top {
+    view-transition-name: navbar-top;
+  }
+
+  .vt-navbar-bottom {
+    view-transition-name: navbar-bottom;
+  }
+
   @view-transition {
     navigation: auto;
   }

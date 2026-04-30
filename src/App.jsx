@@ -90,7 +90,7 @@ export default function App() {
       <main className="app-container">
         {showNavbar && <ReminderBanner />}
 
-        <div style={{ viewTransitionName: 'page-content' }}>
+        <div className="vt-page-content">
           {isDetail ? (
             <StreakDetail
               streakId={detailStreakId}

@@ -35,7 +35,7 @@ export default function Navbar({ currentPage, onPageChange }) {
   return (
     <>
       {/* Desktop top bar */}
-      <nav className={styles.topBar} style={{ viewTransitionName: 'navbar-top' }}>
+      <nav className={`${styles.topBar} vt-navbar-top`}>
         <div className={styles.topInner}>
           <div className={styles.brand}>
             <FaBolt className={styles.logo} />
@@ -76,7 +76,7 @@ export default function Navbar({ currentPage, onPageChange }) {
       </nav>
 
       {/* Mobile bottom tab bar */}
-      <nav className={styles.bottomBar} style={{ viewTransitionName: 'navbar-bottom' }}>
+      <nav className={`${styles.bottomBar} vt-navbar-bottom`}>
         {pages.map((p) => {
           const Icon = p.icon;
           const isActive = currentPage === p.id;
