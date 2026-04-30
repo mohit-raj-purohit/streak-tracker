@@ -1,0 +1,83 @@
+/* AddStreakModal — form content styles only (shell handled by GlassModal) */
+
+.form {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Even grid for colors */
+.colorGrid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: var(--space-2);
+  justify-items: center;
+}
+
+.colorSwatch {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  border: 2.5px solid transparent;
+  min-height: 32px;
+  min-width: 32px;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.colorSwatch:active { transform: scale(1.15); }
+
+.colorSwatch.selected {
+  border-color: var(--text-primary);
+  transform: scale(1.12);
+}
+
+/* Even grid for icons */
+.iconGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-2);
+  justify-items: center;
+}
+
+.iconOption {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-xs);
+  border: 1.5px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 16px;
+  min-height: 44px;
+  min-width: 44px;
+  transition: all var(--transition-fast);
+}
+
+.iconOption:active { background: var(--bg-active); }
+.iconOption.selected { background: var(--bg-hover); }
+
+.actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* ---- Desktop ---- */
+@media (min-width: 769px) {
+  .form { padding: var(--space-5); }
+  .iconGrid { grid-template-columns: repeat(7, 1fr); }
+  .iconOption { width: 40px; height: 40px; min-height: 40px; min-width: 40px; }
+  .iconOption:hover { border-color: var(--text-tertiary); background: var(--bg-hover); }
+  .colorSwatch:hover { transform: scale(1.15); }
+}

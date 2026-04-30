@@ -1,0 +1,205 @@
+/* ===== Glass CTA Button — readable text guaranteed ===== */
+
+.btn {
+  --btn-accent: var(--accent);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-target);
+  min-width: auto;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  border: none;
+  outline: none;
+  transition:
+    box-shadow var(--duration-normal) var(--ease-in-out),
+    border-color var(--duration-normal) var(--ease-in-out);
+}
+
+.full { width: 100%; }
+
+/* ===== PRIMARY — solid accent with glass border/glow ===== */
+.primary {
+  background: var(--btn-accent);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 0 0 0.5px rgba(255, 255, 255, 0.1) inset,
+    0 1px 0 rgba(255, 255, 255, 0.15) inset,
+    0 4px 14px rgba(0, 0, 0, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.primary:hover {
+  box-shadow:
+    0 0 0 0.5px rgba(255, 255, 255, 0.15) inset,
+    0 1px 0 rgba(255, 255, 255, 0.2) inset,
+    0 6px 22px rgba(0, 0, 0, 0.18),
+    0 2px 6px rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== DANGER — solid red with glass edge ===== */
+.danger {
+  background: var(--danger);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 0 0 0.5px rgba(255, 255, 255, 0.08) inset,
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    0 4px 14px rgba(0, 0, 0, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.danger:hover {
+  box-shadow:
+    0 0 0 0.5px rgba(255, 255, 255, 0.12) inset,
+    0 1px 0 rgba(255, 255, 255, 0.15) inset,
+    0 6px 22px rgba(0, 0, 0, 0.18);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ===== GHOST — theme-aware solid backing ===== */
+.ghost {
+  border: 1px solid var(--border);
+  transition: all var(--transition-fast);
+}
+
+[data-theme='light'] .ghost {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+}
+
+[data-theme='light'] .ghost:hover {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+[data-theme='dark'] .ghost {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] .ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Shine sweep ===== */
+.shine {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.1) 40%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 60%,
+    transparent 80%
+  );
+  transform: skewX(-18deg);
+  animation: shineSweep 3s ease-in-out infinite;
+}
+
+.btn:hover .shine::after {
+  animation-duration: 1.8s;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.15) 40%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.15) 60%,
+    transparent 80%
+  );
+}
+
+/* No shine on ghost */
+.ghost .shine::after {
+  animation: none;
+  display: none;
+}
+
+@keyframes shineSweep {
+  0%   { left: -100%; }
+  60%  { left: 150%; }
+  100% { left: 150%; }
+}
+
+/* ===== Content ===== */
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.label {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+.btn:hover .icon {
+  transform: scale(1.15) rotate(-6deg);
+}
+
+/* ===== Disabled ===== */
+.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.disabled .shine::after {
+  animation: none;
+}
+
+/* ===== Focus visible ===== */
+.btn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--input-focus-ring),
+    0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .shine::after {
+    animation: none !important;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .btn {
+    font-size: 14px;
+    padding: var(--space-3) var(--space-5);
+  }
+}

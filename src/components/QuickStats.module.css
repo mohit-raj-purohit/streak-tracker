@@ -1,0 +1,40 @@
+/* Mobile first — glass stat cards */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.card {
+  background: var(--glass-bg-elevated);
+  border: 0.5px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  backdrop-filter: blur(var(--glass-blur)) var(--glass-saturate);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) var(--glass-saturate);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition);
+}
+
+.iconWrap {
+  width: 34px; height: 34px;
+  border-radius: var(--radius-xs);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+}
+
+.value { font-size: 18px; font-weight: 800; line-height: 1.1; letter-spacing: -0.3px; }
+.label { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
+
+@media (min-width: 769px) {
+  .grid { grid-template-columns: repeat(4, 1fr); gap: var(--space-3); margin-bottom: var(--space-6); }
+  .card { padding: var(--space-4); }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .iconWrap { width: 38px; height: 38px; font-size: 16px; }
+  .value { font-size: 20px; }
+  .label { font-size: 12px; }
+}

@@ -1,0 +1,28 @@
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--glass-bg-elevated);
+  border: 0.5px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-4);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-xs);
+}
+
+.emoji { font-size: 18px; flex-shrink: 0; }
+
+.text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@media (min-width: 769px) {
+  .banner { padding: var(--space-3) var(--space-4); margin-bottom: var(--space-5); }
+  .text { font-size: 14px; }
+}

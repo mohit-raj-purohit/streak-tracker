@@ -1,0 +1,97 @@
+/* Mobile first */
+.banner {
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.icon { font-size: 14px; flex-shrink: 0; }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.settingsBtn {
+  font-size: 12px;
+  padding: var(--space-2) var(--space-3);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-xs);
+  color: #fff;
+  min-height: 32px;
+  min-width: auto;
+}
+
+.settingsBtn:active { background: rgba(255, 255, 255, 0.35); }
+
+.closeBtn {
+  width: var(--tap-target);
+  height: var(--tap-target);
+  border-radius: var(--radius-xs);
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: auto;
+}
+
+.closeBtn:active { background: rgba(255, 255, 255, 0.2); }
+
+.settings {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 13px;
+}
+
+.settings label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.timeInput {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-xs);
+  width: auto;
+  min-height: 36px;
+  font-size: 16px;
+}
+
+.permBtn {
+  font-size: 12px;
+  padding: var(--space-2) var(--space-3);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-xs);
+  color: #fff;
+  min-height: 36px;
+  min-width: auto;
+  align-self: flex-start;
+}
+
+.permBtn:active { background: rgba(255, 255, 255, 0.35); }
+
+@media (min-width: 769px) {
+  .banner { padding: var(--space-3) var(--space-4); margin-bottom: var(--space-4); }
+  .settings { flex-direction: row; align-items: center; }
+  .settingsBtn:hover { background: rgba(255, 255, 255, 0.3); }
+  .closeBtn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+  .permBtn:hover { background: rgba(255, 255, 255, 0.3); }
+}

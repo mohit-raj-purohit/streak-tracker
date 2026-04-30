@@ -1,0 +1,125 @@
+/* Mobile first */
+.page {
+  padding-top: var(--space-4);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.searchWrap {
+  position: relative;
+  flex: 1 1 100%;
+  order: 1;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.searchInput {
+  padding-left: 36px;
+  height: var(--tap-target);
+}
+
+.filterWrap {
+  position: relative;
+  flex: 1;
+  order: 2;
+}
+
+.filterIcon {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.filterSelect {
+  padding-left: 32px;
+  height: var(--tap-target);
+  font-size: 14px;
+}
+
+.addBtn {
+  order: 3;
+  flex-shrink: 0;
+}
+
+/* Delete all — small muted link at page bottom */
+.dangerLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: var(--space-6) 0 var(--space-2);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  min-height: auto;
+  min-width: auto;
+  opacity: 0.6;
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.dangerLink:active {
+  color: var(--danger);
+  opacity: 1;
+  transform: none;
+}
+
+/* 2-column tile grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.empty {
+  text-align: center;
+  padding: var(--space-12) var(--space-4);
+}
+
+.emptyIcon { font-size: 40px; margin-bottom: var(--space-3); }
+
+.emptyTitle {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.emptyDesc {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: var(--space-5);
+}
+
+@media (min-width: 769px) {
+  .page { padding-top: var(--space-6); }
+
+  .toolbar { gap: var(--space-3); margin-bottom: var(--space-5); }
+
+  .searchWrap { flex: 1 1 auto; min-width: 180px; order: 0; }
+  .filterWrap { flex: 0 0 auto; order: 0; }
+  .filterSelect { min-width: 120px; }
+  .addBtn { order: 0; }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-4);
+  }
+}

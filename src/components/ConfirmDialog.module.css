@@ -1,0 +1,170 @@
+/* ConfirmDialog — readable glass alert */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dialog {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 16px;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+
+[data-theme='light'] .dialog {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 0 0 0.5px rgba(255, 255, 255, 0.8) inset,
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 16px 48px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme='dark'] .dialog {
+  background: rgba(22, 22, 24, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 0 0 0.5px rgba(255, 255, 255, 0.03) inset,
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 24px 80px rgba(0, 0, 0, 0.6);
+}
+
+/* Shine */
+.shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  transform: skewX(-18deg);
+  animation: dialogShine 4s ease-in-out infinite;
+}
+
+[data-theme='light'] .shine::after {
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.2) 45%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.2) 55%,
+    transparent 70%
+  );
+}
+
+[data-theme='dark'] .shine::after {
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.03) 45%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.03) 55%,
+    transparent 70%
+  );
+}
+
+@keyframes dialogShine {
+  0%   { left: -120%; }
+  50%  { left: 140%; }
+  100% { left: 140%; }
+}
+
+.body {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-6) var(--space-5) var(--space-4);
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
+}
+
+.message {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+}
+
+[data-theme='light'] .actions {
+  border-top: 0.5px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .actions {
+  border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+
+.cancelBtn,
+.confirmBtn {
+  flex: 1;
+  padding: var(--space-4) var(--space-2);
+  font-size: 15px;
+  font-weight: 500;
+  min-height: var(--tap-target);
+  border-radius: 0;
+  color: var(--accent);
+  transition: background var(--transition-fast);
+}
+
+[data-theme='light'] .cancelBtn {
+  border-right: 0.5px solid rgba(0, 0, 0, 0.08);
+  font-weight: 400;
+}
+
+[data-theme='dark'] .cancelBtn {
+  border-right: 0.5px solid rgba(255, 255, 255, 0.08);
+  font-weight: 400;
+}
+
+.cancelBtn:active,
+.confirmBtn:active {
+  background: var(--bg-active);
+  transform: none;
+}
+
+.confirmBtn {
+  font-weight: 600;
+}
+
+.destructive {
+  color: var(--danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shine::after { animation: none !important; }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .dialog { background: var(--bg-secondary) !important; }
+}

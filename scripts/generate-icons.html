@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p>Open this in a browser, right-click each canvas, and "Save image as" to public/</p>
+<canvas id="c192" width="192" height="192"></canvas>
+<canvas id="c512" width="512" height="512"></canvas>
+<script>
+function draw(canvas) {
+  const ctx = canvas.getContext('2d');
+  const s = canvas.width;
+  const r = s * 0.21; // corner radius
+
+  // Rounded rect
+  const grad = ctx.createLinearGradient(0, 0, s, s);
+  grad.addColorStop(0, '#c9a84c');
+  grad.addColorStop(1, '#b8860b');
+
+  ctx.beginPath();
+  ctx.moveTo(r, 0);
+  ctx.lineTo(s - r, 0);
+  ctx.quadraticCurveTo(s, 0, s, r);
+  ctx.lineTo(s, s - r);
+  ctx.quadraticCurveTo(s, s, s - r, s);
+  ctx.lineTo(r, s);
+  ctx.quadraticCurveTo(0, s, 0, s - r);
+  ctx.lineTo(0, r);
+  ctx.quadraticCurveTo(0, 0, r, 0);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Lightning bolt
+  ctx.fillStyle = 'rgba(255,255,255,0.95)';
+  ctx.beginPath();
+  const scale = s / 512;
+  ctx.moveTo(280*scale, 80*scale);
+  ctx.lineTo(180*scale, 260*scale);
+  ctx.lineTo(260*scale, 260*scale);
+  ctx.lineTo(220*scale, 432*scale);
+  ctx.lineTo(360*scale, 232*scale);
+  ctx.lineTo(270*scale, 232*scale);
+  ctx.closePath();
+  ctx.fill();
+}
+draw(document.getElementById('c192'));
+draw(document.getElementById('c512'));
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+/* =============================================================
+   GlassModal — Readable glass panel with layered header
+   ============================================================= */
+
+/* ===== Backdrop ===== */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.sheetMode {
+  align-items: flex-end;
+  padding: 0;
+}
+
+@media (min-width: 769px) {
+  .sheetMode {
+    align-items: center;
+    padding: var(--space-5);
+  }
+}
+
+/* ===== Modal container ===== */
+.modal {
+  position: relative;
+  width: 100%;
+  max-height: 92vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+
+/* Light: solid white base with slight transparency for glass feel */
+[data-theme='light'] .modal {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 0 0 0.5px rgba(255, 255, 255, 0.8) inset,
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 16px 48px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Dark: deep charcoal with subtle warm edge */
+[data-theme='dark'] .modal {
+  background: rgba(22, 22, 24, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 0 0 0.5px rgba(255, 255, 255, 0.03) inset,
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 24px 80px rgba(0, 0, 0, 0.6),
+    0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Bottom-sheet on mobile */
+.sheet {
+  border-radius: 20px 20px 0 0;
+  max-height: 94vh;
+}
+
+@media (min-width: 769px) {
+  .sheet {
+    border-radius: var(--radius);
+    max-height: 88vh;
+  }
+}
+
+/* Sizes */
+.sm { max-width: 320px; }
+.md { max-width: 480px; }
+.lg { max-width: 600px; }
+
+@media (max-width: 768px) {
+  .sm, .md, .lg { max-width: 100%; }
+}
+
+/* ===== Shine — subtle, not distracting ===== */
+.shine {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.03) 45%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.03) 55%,
+    transparent 70%
+  );
+  transform: skewX(-18deg);
+  animation: modalShine 4s ease-in-out infinite;
+}
+
+@keyframes modalShine {
+  0%   { left: -120%; }
+  50%  { left: 140%; }
+  100% { left: 140%; }
+}
+
+/* ===== Header — distinct glass strip ===== */
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+[data-theme='light'] .header {
+  background: rgba(245, 245, 247, 0.6);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+[data-theme='dark'] .header {
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02) inset;
+}
+
+/* Header shine */
+.headerShine {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.headerShine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  transform: skewX(-15deg);
+  animation: headerShine 3s ease-in-out infinite;
+}
+
+[data-theme='light'] .headerShine::after {
+  background: linear-gradient(
+    100deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.3) 45%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.3) 55%,
+    transparent 75%
+  );
+}
+
+[data-theme='dark'] .headerShine::after {
+  background: linear-gradient(
+    100deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.04) 45%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 55%,
+    transparent 75%
+  );
+}
+
+@keyframes headerShine {
+  0%   { left: -100%; }
+  60%  { left: 150%; }
+  100% { left: 150%; }
+}
+
+.headerTitle {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
+}
+
+.closeBtn {
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  min-width: 36px;
+  border-radius: var(--radius-xs);
+  color: var(--text-secondary);
+  font-size: 14px;
+  position: relative;
+  z-index: 1;
+  transition: all var(--transition-fast);
+}
+
+[data-theme='light'] .closeBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] .closeBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+.closeBtn:active {
+  transform: scale(0.9);
+}
+
+/* ===== Body ===== */
+.body {
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  flex: 1;
+  /* On mobile, add enough bottom padding to clear the fixed bottom navbar */
+  padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + var(--space-4));
+}
+
+@media (min-width: 769px) {
+  .body {
+    /* On desktop there's no bottom navbar, just safe area */
+    padding-bottom: var(--space-4);
+  }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .shine::after,
+  .headerShine::after {
+    animation: none !important;
+  }
+}
+
+/* ===== Fallback ===== */
+@supports not (backdrop-filter: blur(1px)) {
+  .modal {
+    background: var(--bg-secondary) !important;
+  }
+  .header {
+    background: var(--bg-tertiary) !important;
+  }
+}
+
+/* ===== Desktop ===== */
+@media (min-width: 769px) {
+  .header {
+    padding: var(--space-5) var(--space-5) var(--space-4);
+  }
+
+  .headerTitle {
+    font-size: 19px;
+  }
+}

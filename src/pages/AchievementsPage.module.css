@@ -1,0 +1,136 @@
+/* Mobile first */
+.page {
+  padding-top: 16px;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.progressBar {
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #ef4444);
+  border-radius: 3px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.badge {
+  background: var(--glass-bg-elevated);
+  border: 0.5px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 16px 12px;
+  text-align: center;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--transition-fast), box-shadow var(--transition);
+}
+
+.badge.earned {
+  border-color: #f59e0b40;
+}
+
+.badge.locked {
+  opacity: 0.5;
+}
+
+.emoji {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.badgeTitle {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.badgeDesc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.earnedLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.lockedLabel {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+/* ---- Desktop ---- */
+@media (min-width: 769px) {
+  .page {
+    padding-top: 24px;
+  }
+
+  .heading {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .progressBar {
+    height: 8px;
+    margin-bottom: 32px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .badge {
+    padding: 24px 16px;
+  }
+
+  .badge:hover {
+    box-shadow: var(--shadow);
+  }
+
+  .emoji {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .badgeTitle {
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .badgeDesc {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+}

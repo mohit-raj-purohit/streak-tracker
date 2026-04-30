@@ -1,0 +1,166 @@
+/* ===== MOBILE FIRST — readable glass navbar ===== */
+.topBar { display: none; }
+
+/* --- Mobile bottom tab bar --- */
+.bottomBar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  padding-bottom: var(--safe-bottom);
+  height: calc(var(--nav-height) + var(--safe-bottom));
+  backdrop-filter: blur(var(--glass-blur-strong)) var(--glass-saturate);
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong)) var(--glass-saturate);
+}
+
+/* Theme-aware solid backing for text readability */
+[data-theme='light'] .bottomBar {
+  background: rgba(255, 255, 255, 0.82);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme='dark'] .bottomBar {
+  background: rgba(12, 12, 14, 0.92);
+  border-top: 0.5px solid rgba(255, 255, 255, 0.05);
+}
+
+.bottomTab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: var(--nav-height);
+  min-width: 0;
+  color: var(--text-tertiary);
+  position: relative;
+  padding: var(--space-2) 0;
+  transition: color var(--transition-fast);
+}
+
+.bottomTab:active { transform: scale(0.92); opacity: 0.7; }
+.bottomActive { color: var(--accent); }
+
+.bottomIcon {
+  font-size: 20px;
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+.bottomActive .bottomIcon { transform: scale(1.12); }
+
+.bottomLabel { font-size: 10px; font-weight: 600; letter-spacing: 0.2px; }
+
+.bottomDot {
+  position: absolute;
+  top: 4px;
+  width: 5px; height: 5px;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 769px) {
+  .topBar {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(var(--glass-blur-strong)) var(--glass-saturate);
+    -webkit-backdrop-filter: blur(var(--glass-blur-strong)) var(--glass-saturate);
+    box-shadow: var(--shadow-xs);
+  }
+
+  [data-theme='light'] .topBar {
+    background: rgba(255, 255, 255, 0.82);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
+  }
+
+  [data-theme='dark'] .topBar {
+    background: rgba(12, 12, 14, 0.92);
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .topInner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .brand { display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0; }
+
+  .logo {
+    color: var(--accent);
+    font-size: 18px;
+    transition: transform var(--transition-fast);
+  }
+
+  .brand:hover .logo { transform: rotate(-12deg) scale(1.1); }
+
+  .title { font-weight: 700; font-size: 17px; letter-spacing: -0.4px; color: var(--text-primary); }
+
+  .desktopTabs {
+    display: flex;
+    gap: var(--space-1);
+    padding: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  [data-theme='light'] .desktopTabs { background: rgba(0, 0, 0, 0.04); }
+  [data-theme='dark'] .desktopTabs { background: rgba(255, 255, 255, 0.06); }
+
+  .desktopTab {
+    position: relative;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-xs);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    min-height: 30px; min-width: auto;
+    transition: color var(--transition-fast);
+  }
+
+  .desktopTab:hover { color: var(--text-primary); }
+  .desktopTab:active { transform: none; }
+  .desktopTab.active { color: var(--text-primary); }
+
+  .indicator {
+    position: absolute; inset: 0;
+    border-radius: var(--radius-xs);
+    z-index: -1;
+    box-shadow: var(--shadow-sm);
+  }
+
+  [data-theme='light'] .indicator {
+    background: rgba(255, 255, 255, 0.85);
+    border: 0.5px solid rgba(0, 0, 0, 0.04);
+  }
+
+  [data-theme='dark'] .indicator {
+    background: rgba(255, 255, 255, 0.08);
+    border: 0.5px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .actions { display: flex; align-items: center; gap: var(--space-1); flex-shrink: 0; }
+
+  .iconBtn {
+    width: 34px; height: 34px;
+    border-radius: var(--radius-xs);
+    color: var(--text-secondary);
+    font-size: 14px;
+    min-height: 34px; min-width: 34px;
+    transition: all var(--transition-fast);
+  }
+
+  .iconBtn:hover { background: var(--bg-hover); color: var(--text-primary); }
+  .iconBtn:active { transform: scale(0.9); }
+
+  .bottomBar { display: none; }
+}

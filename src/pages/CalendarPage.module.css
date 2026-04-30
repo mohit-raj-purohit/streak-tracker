@@ -1,0 +1,482 @@
+/* Mobile first */
+.page {
+  padding-top: 16px;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.filterRow {
+  margin-bottom: 10px;
+}
+
+.select {
+  width: 100%;
+}
+
+/* ---- Streak legend ---- */
+.streakLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.legendChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: var(--glass-bg-elevated);
+  border: 0.5px solid var(--glass-border);
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-weight: 500;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.legendDotColor {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ---- Month nav ---- */
+.monthNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.monthNav h2 {
+  font-size: 16px;
+  font-weight: 700;
+  min-width: 160px;
+  text-align: center;
+}
+
+.monthNav button {
+  width: var(--tap-target);
+  height: var(--tap-target);
+  border-radius: var(--radius-xs);
+  color: var(--text-secondary);
+  background: var(--glass-bg-elevated);
+  border: 0.5px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+.monthNav button:active {
+  background: var(--bg-hover);
+}
+
+/* ---- Calendar wrap ---- */
+.calendarWrap {
+  background: var(--glass-bg-elevated);
+  border: 0.5px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 8px;
+  margin-bottom: 12px;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---- Calendar grid ---- */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+}
+
+.dayHeader {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  padding: 6px 0;
+}
+
+.emptyCell {
+  aspect-ratio: 1;
+}
+
+/* Adjacent month dates — dimmed, non-interactive */
+.adjacentCell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-xs);
+}
+
+.adjacentNumber {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  opacity: 0.4;
+  line-height: 1;
+}
+
+.dayCell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-xs);
+  position: relative;
+  gap: 1px;
+  min-height: 0;
+  min-width: 0;
+  padding: 2px;
+  border: none;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+}
+
+.dayCell:active {
+  background: var(--bg-hover);
+}
+
+.dayCell.today {
+  background: var(--bg-tertiary);
+  font-weight: 700;
+}
+
+.dayCell.hasStreaks {
+  cursor: pointer;
+}
+
+.dayNumber {
+  font-size: 12px;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+/* ---- Week streak bars ---- */
+.weekBars {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 2px 4px 8px;
+}
+
+.weekBar {
+  height: 3px;
+  border-radius: 1.5px;
+  width: 100%;
+}
+
+/* ---- Popup (replaces tooltip) ---- */
+.popupOverlay {
+  position: fixed;
+  inset: 0;
+  background: var(--modal-overlay);
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+}
+
+.popup {
+  position: relative;
+  width: 100%;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-bottom: calc(var(--safe-bottom) + 16px);
+  border-radius: 20px 20px 0 0;
+
+  /* Glass surface — matches GlassModal */
+  background:
+    linear-gradient(
+      175deg,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 0 0 0.5px rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 16px 48px rgba(0, 0, 0, 0.18);
+}
+
+[data-theme='dark'] .popup {
+  background:
+    linear-gradient(
+      175deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.popupHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  /* Glass header strip */
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+}
+
+[data-theme='dark'] .popupHeader {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.popupHeader h3 {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.popupClose {
+  width: var(--tap-target);
+  height: var(--tap-target);
+  color: var(--text-tertiary);
+  font-size: 16px;
+}
+
+.popupBody {
+  padding: 12px 16px;
+}
+
+.popupEmpty {
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 14px;
+  padding: 20px 0;
+}
+
+.popupItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.popupItem:last-child {
+  border-bottom: none;
+}
+
+.popupDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.popupTitle {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ---- Streak summary card (below calendar) ---- */
+.summaryCard {
+  background: var(--glass-bg-elevated);
+  border: 0.5px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-sm);
+}
+
+.summaryTitle {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+}
+
+.summaryEmpty {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  text-align: center;
+  padding: var(--space-4) 0;
+}
+
+.summaryList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.summaryRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 0.5px solid var(--border-light);
+}
+
+.summaryRow:last-child {
+  border-bottom: none;
+}
+
+.summaryDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.summaryName {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.summaryStatus {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Year overview with colored bars ---- */
+.heatmapSection {
+  background: var(--glass-bg-elevated);
+  border: 0.5px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 14px;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-sm);
+}
+
+.heatmapSection h2 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.yearBars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.yearMonth {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.yearMonthLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.yearBarRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.yearBar {
+  height: 4px;
+  border-radius: 2px;
+  width: 100%;
+  opacity: 0.85;
+}
+
+.yearBarEmpty {
+  height: 4px;
+  border-radius: 2px;
+  width: 100%;
+  background: var(--bg-tertiary);
+}
+
+/* ---- Desktop ---- */
+@media (min-width: 769px) {
+  .page {
+    padding-top: 24px;
+  }
+
+  .heading {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .select {
+    max-width: 260px;
+  }
+
+  .calendarWrap {
+    padding: 16px;
+  }
+
+  .dayHeader {
+    font-size: 11px;
+    padding: 8px 0;
+  }
+
+  .dayNumber {
+    font-size: 13px;
+  }
+
+  .weekBar {
+    height: 4px;
+  }
+
+  /* On desktop, popup is centered card instead of bottom sheet */
+  .popupOverlay {
+    align-items: center;
+    padding: 20px;
+  }
+
+  .popup {
+    border-radius: var(--radius);
+    max-width: 400px;
+    max-height: 50vh;
+    padding-bottom: 16px;
+  }
+
+  .heatmapSection {
+    padding: 20px;
+  }
+
+  .yearBar {
+    height: 5px;
+  }
+}
