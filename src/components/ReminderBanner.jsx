@@ -15,9 +15,11 @@ export default function ReminderBanner() {
   const idle = streaks.filter((s) => s.status === 'idle');
   const shouldShow = idle.length > 0 && !dismissed;
 
-  // Browser notification
+  // Browser notification — guard for iOS which has no Notification API
   useEffect(() => {
-    if (!reminderTime || Notification.permission === 'denied') return;
+    if (!reminderTime) return;
+    if (typeof window === 'undefined' || !('Notification' in window)) return;
+    if (Notification.permission === 'denied') return;
 
     const checkTime = () => {
       const now = new Date();
