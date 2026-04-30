@@ -3,6 +3,8 @@
   "short_name": "Streaks",
   "description": "Track your daily habits and build streaks. A premium streak counter.",
   "start_url": "/",
+  "scope": "/",
+  "id": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0c0c0e",
@@ -10,9 +12,9 @@
   "categories": ["productivity", "lifestyle", "utilities"],
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
     },
     {
       "src": "/icon-192.png",
@@ -29,6 +31,11 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     }
   ],
   "shortcuts": [
